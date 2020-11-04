@@ -17,7 +17,7 @@ static size_t WriteCallbackToString(void* contents, size_t size, size_t nmemb, v
 	return size * nmemb;
 }
 
-std::string Shiki::api_users_id_anime_rates(int page, int limit, std::string status, bool censored) {
+std::string Shiki::api_users_id_anime_rates(std::string status, int limit, int page, bool censored) {
     std::string ans;
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &ans);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallbackToString);
