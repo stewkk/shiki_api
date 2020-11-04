@@ -12,9 +12,19 @@ Shiki::~Shiki() {
     curl_global_cleanup();
 }
 
+std::string readBuffer;
+
+static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
+{ 
+    size_t realsize = size * nmemb;
+    readBuffer.append((char*)contents, realsize);
+    return realsize;
+}
+
 std::string Shiki::api_users_id_anime_rates(int page, int limit, std::string status, bool censored) {
     std::string ans;
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &ans);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
     curl_easy_setopt(curl, CURLOPT_URL, (shiki_api_domain + "api/users/" + shiki_api_user + "/anime_rates" + 
             "?page=" + std::to_string(page) + "&limit=" + std::to_string(limit) + "&status=" + status + 
             "&censored=" + (censored ? "true" : "false")).c_str());
