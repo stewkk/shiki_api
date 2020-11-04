@@ -18,6 +18,9 @@ std::string Shiki::api_users_id_anime_rates(int page, int limit, std::string sta
     curl_easy_setopt(curl, CURLOPT_URL, shiki_api_domain + "api/users/" + shiki_api_user + "/anime_rates" + 
             "?page=" + std::to_string(page) + "&limit=" + std::to_string(limit) + "&status=" + status + 
             "&censored=" + (censored ? "true" : "false"));
+    std::cout << shiki_api_domain + "api/users/" + shiki_api_user + "/anime_rates" + 
+            "?page=" + std::to_string(page) + "&limit=" + std::to_string(limit) + "&status=" + status + 
+            "&censored=" + (censored ? "true" : "false") << std::endl;
     curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
     curl_easy_perform(curl);
     return ans;
