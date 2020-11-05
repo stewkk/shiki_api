@@ -11,7 +11,6 @@ public:
             int page = 1, bool censored = false);
 private:
     CURL* curl;
-    std::string shiki_api_domain = "https://shikimori.one/";
+    const std::string shiki_api_domain = "https://shikimori.one/";
     std::string shiki_api_user;
 };
-
